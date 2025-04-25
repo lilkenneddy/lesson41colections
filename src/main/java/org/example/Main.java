@@ -1,24 +1,29 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        List<Car> cars = new ArrayList<>();
-        Car car1 = new Car(2024);
-        Car car2 = new Car(2018);
-        Car car3 = new Car(2025);
-        cars.add(car1);
-        cars.add(car2);
-        cars.add(car3);
-        System.out.println("before sorting : " + cars);
-        Collections.sort(cars);
-        System.out.println("after sorting : " + cars);
-    }
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car(2024, 800));
+        carList.add(new Car(2018, 300));
+        carList.add(new Car(2025, 240));
 
+        System.out.println("before sorting : " + carList);
+        carList.sort(Comparator.comparingInt(Car::getYearOfManufacture));
+        System.out.println("after sorting : " + carList);
+
+        Comparator<Car> engineThenYear = Comparator
+                .comparingInt(Car::getEngineCapacity)
+                .thenComparingInt(Car::getYearOfManufacture);
+
+        TreeSet<Car> sortedByEngine = new TreeSet<>(engineThenYear);
+        sortedByEngine.addAll(carList);
+
+        System.out.println("\nTreeSet за об’ємом двигуна:");
+        for (Car car : sortedByEngine) {
+            System.out.println(car);
+        }
+
+    }
 }

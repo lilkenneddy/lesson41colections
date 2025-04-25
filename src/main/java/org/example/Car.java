@@ -14,6 +14,11 @@ public class Car implements Comparable<Car> {
         this.engineCapacity = engineCapacity;
     }
 
+    @Override
+    public String toString() {
+        return "Car{year=" + yearOfManufacture + ", engine=" + engineCapacity + "cc}";
+    }
+
     public int getYearOfManufacture() {
         return yearOfManufacture;
     }
@@ -32,7 +37,7 @@ public class Car implements Comparable<Car> {
 
     @Override
     public int compareTo(Car o) {
+        return Integer.compare(this.yearOfManufacture, o.yearOfManufacture);
 
-        return Integer.compare(getYearOfManufacture(), getEngineCapacity());
     }
 }
